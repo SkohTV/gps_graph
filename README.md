@@ -1,4 +1,4 @@
-# Project Name
+# GPS Graph
 *Noé LORRET-DESPRET*<br>
 *Laure WARLOP*<br>
 *CIR3*<br>
