@@ -19,3 +19,10 @@ User friendly interface<br>
 <br>
 **<u>Problem solved by the project:</u>**<br>
 How to travel the fastest from A to B in a city ?<br>
+
+
+## Organisation
+Interface - wrlp
+API Openstreetmap - Skoh 
+Bridge - Skoh
+Graphs - wrlp
