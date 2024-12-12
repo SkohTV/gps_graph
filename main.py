@@ -1,4 +1,9 @@
-from src.api.test import query
+import json
+
+from src.api.cache import update_cache_map
 
 
-query()
+
+if __name__ == "__main__":
+  update_cache_map(force=True)
+
