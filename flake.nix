@@ -1,27 +1,21 @@
-{ outputs = { nixpkgs, ... }:
+{
+inputs.poetry2nix.url = "github:nix-community/poetry2nix";
+
+
+outputs = { self, nixpkgs, poetry2nix }:
 
 let
-  allSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+  system = "x86_64-linux";
+  pkgs = nixpkgs.legacyPackages.${system};
 
-  forAllSystems = f: nixpkgs.lib.genAttrs allSystems (system: f {
-    pkgs = import nixpkgs { inherit system; };
-  });
+  inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication mkPoetryEnv;
+  pythonApp = mkPoetryApplication { projectDir = ./.; };
+  pythonEnv = mkPoetryEnv { projectDir = ./.; };
+
 
 in {
-  devShells = forAllSystems ({ pkgs }: {
-    default = pkgs.mkShell {
-      packages = with pkgs; [
-        # non_python_package
-
-        (python313.withPackages (ps: with ps; [
-          virtualenv
-          pip
-
-          requests
-        ]))
-      ];
-    };
-
-  });
+  devShells.${system}.default = pkgs.mkShell {
+    packages = [ pythonEnv ];
+  };
 };
 }
