@@ -22,19 +22,19 @@ let
   );
 
   inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication mkPoetryEnv defaultPoetryOverrides;
-  pythonApp = mkPoetryApplication { projectDir = ./.; };
-  pythonEnv = mkPoetryEnv {
-    projectDir = ./.;
-    overrides = p2n-overrides;
-  };
-
+  pythonApp = mkPoetryApplication { projectDir = ./.; overrides = p2n-overrides; };
+  pythonEnv = mkPoetryEnv { projectDir = ./.; overrides = p2n-overrides; };
 
 in {
+
   devShells.${system}.default = pkgs.mkShell {
-    packages = [
-      pkgs.python312Full
-      pythonEnv
-    ];
+    packages = [ pkgs.python312Full pythonEnv ];
   };
+
+  apps.${system}.default = {
+    type = "app";
+    program = "${pythonApp}/bin/<script>";
+  };
+
 };
 }
