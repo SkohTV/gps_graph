@@ -2,6 +2,11 @@ from typing import Any
 import requests
 from dataclasses import dataclass
 from urllib.parse import quote
+import json
+import os
+
+from src.consts import CACHE_DIR
+from src.logging import logger
 
 
 
@@ -26,7 +31,6 @@ QUERY_WAYS = f'''\
 
 
 
-
 # json returned by requests are Any, but this avoid confusing JSON_T with Any
 @dataclass
 class OverpassResponse:
@@ -41,7 +45,7 @@ class OverpassResponse:
 def query_overpass_api(data: str) -> OverpassResponse:
   '''Send a request to overpass-api with unquoted {data}'''
 
-  print('Querying overpass-api...')
+  logger.debug('Querying overpass-api...')
 
   # Build & send request
   data = "data=" + quote(data)
@@ -52,5 +56,27 @@ def query_overpass_api(data: str) -> OverpassResponse:
     raise requests.HTTPError()
 
   # Else build and return JSON_T wrapper around Any
-  print('Request sucessfull')
+  logger.debug('Request sucessfull')
   return OverpassResponse(r.json())
+
+
+
+def update_cache_map(force = False):
+  '''
+  Update the json files containing all nodes and way fetched
+  Be careful, these updates can take a few minutes
+  '''
+
+  # Remove the cache and update it
+  if not os.scandir(CACHE_DIR) or force:
+
+    # Cache nodes
+    with open(os.path.join(CACHE_DIR, 'nodes.json'), 'w') as f:
+      nodes = query_overpass_api(QUERY_NODES)
+      json.dump(nodes.items(), f)
+     
+    # Cache ways
+    with open(os.path.join(CACHE_DIR, 'ways.json'), 'w') as f:
+      ways = query_overpass_api(QUERY_WAYS)
+      json.dump(ways.items(), f)
+
