@@ -2,17 +2,21 @@ import os
 from dotenv import load_dotenv
 
 from src.api_icloud import Icloud
-from src.core.mapping import testing_loadall_nodes
 from src.args import setup_parser
 from src.logging import logger
-from src.core import verify_integrity_cache
+from src.utils import verify_integrity_cache
 from src.logging import setup_logging
 from src.api_overpass import load_cache, update_cache
 from src.args import arguments
+from src.utils import print_version
 
 
 
 def main():
+
+  if arguments.version:
+    print_version()
+    return
 
   if arguments.env:
     load_dotenv(arguments.env) # Load env vars from .env file
@@ -23,8 +27,6 @@ def main():
 
   icloud = Icloud()
   ret = icloud.login(os.getenv('ICLOUD_EMAIL') or '', os.getenv('ICLOUD_PWD') or '')
-
-  return
 
   # Rebuild cache depending on args
   update_cache(force=arguments.force_rebuild_cache)

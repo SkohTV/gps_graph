@@ -1,6 +1,9 @@
 import os
 
 
+PROJECT_NAME = 'gps_graph' # Yes, this is a modular value
+VERSION = '0.0.1-dev'
+
 CACHE_DIR = os.path.join(os.getcwd(), '.cache')
 LOG_DIR = os.path.join(CACHE_DIR, 'logs')
 
