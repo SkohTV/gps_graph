@@ -10,6 +10,7 @@ def setup_parser() -> argparse.Namespace:
     description='Blablabla',
   )
 
+  parser.add_argument('-e', '--env')
   parser.add_argument('-v', '--verbose', action='store_true')
   parser.add_argument('-n', '--no-gui', action='store_true')
   parser.add_argument('-s', '--silent', action='store_true')
