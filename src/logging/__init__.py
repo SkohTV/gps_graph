@@ -16,7 +16,10 @@ logger = logging.getLogger(__name__)
 def setup_logging() -> None:
   '''Init the logger with correct params'''
 
-  filename = 'verbose.json' if arguments.verbose else 'normal.json'
+  filename = 'silent.json' if arguments.silent \
+        else 'verbose.json' if arguments.verbose \
+        else 'normal.json'
+
   config_file = os.path.join(os.getcwd(), 'src', 'logging', filename)
   with open(config_file) as f:
     config = json.load(f)

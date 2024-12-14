@@ -42,3 +42,4 @@ def verify_integrity_cache() -> None:
 
   if not os.path.isdir(LOG_DIR):
     os.makedirs(LOG_DIR)
+
