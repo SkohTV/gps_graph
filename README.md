@@ -22,11 +22,11 @@ How to travel the fastest from A to B in a city ?<br>
 
 
 ## Organisation
-Interface - wrlp
-API Openstreetmap - Skoh 
-Bridge - Skoh
-Graphs - wrlp
-Core - both
-
-Chacun une branche
-Merge sur le main tous les 2-3 soirs
+Interface - wrlp<br>
+API Openstreetmap - Skoh<br>
+Bridge - Skoh<br>
+Graphs - wrlp<br>
+Core - both<br>
+<br>
+Chacun une branche<br>
+Merge sur le main tous les 2-3 soirs<br>
