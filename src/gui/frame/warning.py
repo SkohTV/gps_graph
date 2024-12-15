@@ -3,6 +3,7 @@ Page proposant d'ajouter des warnings
 """
 
 import tkinter as tk
+import tkintermapview
 from tkinter import ttk
 from tkinter import font
 

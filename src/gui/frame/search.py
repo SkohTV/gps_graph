@@ -3,6 +3,7 @@ Page proposant la recherche d'un trajet
 """
 
 import tkinter as tk
+import tkintermapview
 from tkinter import ttk
 from tkinter import font
 from tkinter import StringVar
@@ -60,13 +61,13 @@ class AppSearch(tk.Frame):
 
     def bouton_search(self) -> None:
         """ Affiche la page TrajetIndication"""
-        self.controller.external_show_frame("AppTrajetIndications")
+        self.controller.external_show_frame("AppItineraire")
 
     def bouton_saved(self) -> None:
         """ Affiche la page TrajetIndication"""
-        self.controller.external_show_frame("AppTrajetIndications")
+        self.controller.external_show_frame("AppItineraire")
 
     def bouton_recent(self) -> None:
             """ Affiche la page TrajetIndication"""
-            self.controller.external_show_frame("AppTrajetIndications")
+            self.controller.external_show_frame("AppItineraire")
 

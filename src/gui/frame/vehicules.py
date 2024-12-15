@@ -3,6 +3,7 @@ Page proposant plusieurs modes de transports
 """
 
 import tkinter as tk
+import tkintermapview
 from tkinter import ttk
 from tkinter import font
 

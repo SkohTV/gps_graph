@@ -4,7 +4,7 @@ app est la classe principale de l'application.
 """
 
 import sys
-import tkinter as tk    
+import tkinter as tk   
 from src.gui.frame.accueil import AppAccueil
 from src.gui.frame.itineraire import AppItineraire
 from src.gui.frame.search import AppSearch
@@ -36,17 +36,17 @@ class App(tk.Tk):
         tk.Tk.__init__(self)
 
         # Valeurs réutilisées dans des frames, nécessaires ici pour y accéder
-        self.back_button = tk.PhotoImage(file="icone/back.png")
+        # self.back_button = tk.PhotoImage(file="icone/back.png")
 
         # On attrape l'event de fermeture de la fenêtre, pour pouvoir clore le script
         self.protocol("WM_DELETE_WINDOW", self.on_close)
         
         # Change les paramètres basiques de la fenêtre
-        self.resizable(False, False)
+        self.resizable(True, True)
         
         # On crée un pack pour englober la frame
-        container = tk.Frame(self, height=1800, width=1500)
-        container.pack(side="top", fill="both", expand=True)
+        container = tk.Frame(self, height=1500, width=1300)
+        container.pack(fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
@@ -73,7 +73,7 @@ class App(tk.Tk):
 
         # On met la frame en grand
         self.title("GPS")
-        self.geometry("1500x1800")
+        self.geometry("1300x1500")
 
         # On l'affiche
         frame.tkraise()

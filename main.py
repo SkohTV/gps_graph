@@ -5,6 +5,7 @@ from src.core import verify_integrity_cache
 from src.logging import setup_logging
 from src.api import load_cache, update_cache
 from src.args import arguments
+from src.gui.app import App
 
 
 
@@ -28,9 +29,10 @@ def main():
 
 # Ne s'exéctue que si main.py est lancé, pas importé
 if __name__ == "__main__":
-  main()
+  # main()
 
-  testing_loadall_nodes()
+  # testing_loadall_nodes()
+
 
   # logger.debug("debug message", extra={"x": "hello"})
   # logger.info("info message")
@@ -38,3 +40,5 @@ if __name__ == "__main__":
   # logger.error("error message")
   # logger.critical("critical message")
 
+  app = App()
+  app.mainloop()

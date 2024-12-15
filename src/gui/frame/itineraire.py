@@ -2,6 +2,7 @@
 Page proposant les différents itineraire du gps
 """
 import tkinter as tk
+import tkintermapview
 from tkinter import ttk
 from tkinter import font
 
@@ -31,28 +32,29 @@ class AppItineraire(tk.Frame):
         self.controller = controller
 
         # On créer différentes frames pour formatter l'affichage de la page
-        frame1 = ttk.Frame(self)
-        frame2 = ttk.Frame(self)
-        frame3 = ttk.Frame(self)
+        frame = ttk.Frame(self)
 
         # On définit des widget
-        self.label_from_to = ttk.Label(frame1, text="from->to", background="purple", foreground="pink")
-        self.bouton_go = ttk.Button(frame2, text="Go", command=self.bouton_go)
-        self.label_km_temps = ttk.Label(frame3, text="km/temps", background="purple", foreground="pink")
+        self.map_widget = tkintermapview.TkinterMapView(frame, width=2000, height=2000, corner_radius=0)
+        self.label_from_to = ttk.Label(frame, text="from->to")
+        self.bouton_go = ttk.Button(frame, text="Go", command=self.bouton_go)
+        self.label_km_temps = ttk.Label(frame, text="km/temps")
         
         # On change le style des widgets
-        self.label_from_to["font"] = font.Font(family="Verdana", weight="bold", size=30)
+        self.label_from_to["font"] = font.Font(family="Verdana", weight="normal", size=10)
         self.bouton_go["style"] = "giga.TButton"
-        self.label_km_temps["font"] = font.Font(family="Verdana", weight="bold", size=30)
+        self.label_km_temps["font"] = font.Font(family="Verdana", weight="normal", size=10)
 
-         # On places les widgets dans la fenêtre à des endroits spécifiques
+        # On places les widgets dans la fenêtre à des endroits spécifiques
+        self.map_widget.set_position(49.183333,-0.35)  # Caen, France
+        self.map_widget.set_zoom(17)
         self.label_from_to.pack(side="top", pady=10)
-        self.bouton_go.pack(side="right", padx=15, pady=5)
+        self.bouton_go.pack(side="bottom", padx=15, pady=5)
         self.label_km_temps.pack(side="bottom", pady=10)
+        self.map_widget.pack(fill="both")
+        # self.map_widget.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-        frame1.pack()
-        frame2.pack()
-        frame3.pack()
+        frame.pack()
 
     def bouton_go(self) -> None:
         """ Affiche la frame warning """
