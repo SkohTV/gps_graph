@@ -52,7 +52,7 @@ class App(tk.Tk):
 
         # on ajoute les frames à un dictionnaire
         self.frames = {}
-        for item in (AppAccueil,):#, AppItineraire, AppSearch, AppTrajetIndications, AppVehicules, AppWarning):
+        for item in (AppAccueil, AppItineraire, AppSearch, AppVehicules, AppWarning, AppTrajetIndications):
             print(item)
             frame = item(container, self)
             self.frames[item] = frame
@@ -96,6 +96,8 @@ class App(tk.Tk):
                 self.show_frame(AppVehicules)
             case "AppWarning":
                 self.show_frame(AppWarning)
+            case "AppAccueil":
+                self.show_frame(AppAccueil)
     
     def on_close(self) -> None:
         """ Ferme la fenêtre """
