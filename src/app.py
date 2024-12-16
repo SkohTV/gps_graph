@@ -12,6 +12,7 @@ from src.logging import setup_logging
 from src.api_overpass import load_cache, update_cache
 from src.args import arguments
 from src.utils import print_version
+from src.gui.app import App
 
 
 
@@ -45,10 +46,6 @@ def main():
   # Rebuild cache depending on args
   update_cache(force=arguments.force_rebuild_cache)
 
-  if not arguments.no_gui:
-    # run gui
-    ...
-
   nodes, ways = load_cache()
 
   graph_ways = GraphWays()
@@ -56,6 +53,10 @@ def main():
 
   dict_nodes = DictNodes(graph_ways=graph_ways)
   dict_nodes.load(nodes)
+
+  if not arguments.no_gui:
+    app = App()
+    app.mainloop()
 
   logger.debug('Reached end of script, goodbye')
 
