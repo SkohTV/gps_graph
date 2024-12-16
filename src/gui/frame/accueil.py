@@ -3,6 +3,7 @@ Page d'accueil de l'application
 """
 
 import tkinter as tk
+import tkintermapview 
 from tkinter import ttk
 from tkinter import font
 
@@ -12,6 +13,7 @@ class AppAccueil(tk.Frame):
     Attributes: 
         controller (src.app.App): Classe tk.Tk principale qui controle la tk.Frame
         label : Text de la page d'accueil
+        map_widget : la carte
         bouton_mode_transport : Bouton pour choisir le mode de transport
         bouton_warning : Bouton pour ajouter des warnings
         bouton_where : Bouton pour rechercher une adresse
@@ -34,16 +36,14 @@ class AppAccueil(tk.Frame):
         self.controller = controller
 
         # On créer différentes frames pour formatter l'affichage de la page
-        frame1 = ttk.Frame(self)
-        frame2 = ttk.Frame(self)
-        frame3 = ttk.Frame(self)
-        frame4 = ttk.Frame(self)
+        frame = ttk.Frame(self)
 
         # On définit des widget
-        self.label = ttk.Label(frame1, text="GPS", background="green", foreground="red")
-        self.bouton_mode_transport = ttk.Button(frame2, text="Mode of transportation", command=self.bouton_mode_transport)
-        self.bouton_warning = ttk.Button(frame3, text="Add Warning", command=self.bouton_warning)
-        self.bouton_where = ttk.Button(frame4, text="Where", command=self.bouton_where)
+        self.map_widget = tkintermapview.TkinterMapView(frame, width=2000, height=2000, corner_radius=0)
+        self.label = ttk.Label(frame, text="GPS")
+        self.bouton_mode_transport = ttk.Button(frame, text="Mode of transportation", command=self.bouton_mode_transport)
+        self.bouton_warning = ttk.Button(frame, text="Add Warning", command=self.bouton_warning)
+        self.bouton_where = ttk.Button(frame, text="Where", command=self.bouton_where)
 
         # On change le style des widgets
         self.label["font"] = font.Font(family="Verdana", weight="bold", size=30)
@@ -52,15 +52,25 @@ class AppAccueil(tk.Frame):
         self.bouton_where["style"] = "giga.TButton"
 
         # On places les widgets dans la fenêtre à des endroits spécifiques
+        self.map_widget.set_position(49.183333,-0.35)  # Caen, France
+        self.map_widget.set_zoom(17)
+        self.map_widget.set_address("16 bis Quai Amiral Hamelin, caen, france")
         self.label.pack(side="top", pady=10)
-        self.bouton_mode_transport.pack(side="left", padx=15, pady=5)
-        self.bouton_warning.pack(side="right", padx=15, pady=5)
         self.bouton_where.pack(side="bottom", fill="x", pady=10)
+        self.bouton_mode_transport.pack(side="bottom", padx=15, pady=5)
+        self.bouton_warning.pack(side="bottom", padx=15, pady=5)
+        # self.map_widget.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        self.map_widget.pack(fill="both")
 
-        frame1.pack()
-        frame2.pack()
-        frame3.pack()
-        frame4.pack()
+        # le marker prend la position
+        # marker_1 = self.map_widget.set_address("16 bis Quai Amiral Hamelin, caen, france", marker=True)
+
+        # print(marker_1.position, marker_1.text)  # prend la position et le texte
+
+        # marker_1.set_text("Moho")  # met un nouveau texte
+        # marker_1.text("Moho")
+
+        frame.pack()
 
     def bouton_mode_transport(self) -> None:
         """ Affiche la frame vehicules """
