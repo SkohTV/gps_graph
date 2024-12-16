@@ -5,6 +5,7 @@ import tkinter as tk
 import tkintermapview
 from tkinter import ttk
 from tkinter import font
+from tkinter.ttk import Style
 
 class AppItineraire(tk.Frame):
     """ 
@@ -31,6 +32,8 @@ class AppItineraire(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
+        style = Style()
+
         # On créer différentes frames pour formatter l'affichage de la page
         frame = ttk.Frame(self)
 
@@ -39,11 +42,16 @@ class AppItineraire(tk.Frame):
         self.label_from_to = ttk.Label(frame, text="from->to")
         self.bouton_go = ttk.Button(frame, text="Go", command=self.bouton_go)
         self.label_km_temps = ttk.Label(frame, text="km/temps")
+ 
         
         # On change le style des widgets
         self.label_from_to["font"] = font.Font(family="Verdana", weight="normal", size=10)
         self.bouton_go["style"] = "giga.TButton"
         self.label_km_temps["font"] = font.Font(family="Verdana", weight="normal", size=10)
+        self.label_from_to.config(foreground="gray")
+        self.label_km_temps.config(foreground="gray")
+
+        style.configure(self, background="black")
 
         # On places les widgets dans la fenêtre à des endroits spécifiques
         self.map_widget.set_position(49.183333,-0.35)  # Caen, France

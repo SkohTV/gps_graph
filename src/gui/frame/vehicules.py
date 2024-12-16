@@ -6,6 +6,7 @@ import tkinter as tk
 import tkintermapview
 from tkinter import ttk
 from tkinter import font
+from tkinter.ttk import Style
 
 class AppVehicules(tk.Frame):
     """ 
@@ -33,6 +34,8 @@ class AppVehicules(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
+        style = Style()
+
         # On créer différentes frames pour formatter l'affichage de la page
         frame = ttk.Frame(self)
 
@@ -42,15 +45,15 @@ class AppVehicules(tk.Frame):
         self.bouton_foot = ttk.Button(frame, text="Foot", command=self.bouton_foot)
 
          # On change le style des widgets
-        self.bouton_car["style"] = "giga.TButton"
-        self.bouton_bicycle["style"] = "giga.TButton"
-        self.bouton_foot["style"] = "giga.TButton"
+        self.bouton_car["style"] = "mega.TButton"
+        self.bouton_bicycle["style"] = "mega.TButton"
+        self.bouton_foot["style"] = "mega.TButton"
 
         # On places les widgets dans la fenêtre à des endroits spécifiques
-        self.bouton_car.pack(side="top", padx=15, pady=5)
-        self.bouton_bicycle.pack(side="top", padx=15, pady=5)
-        self.bouton_foot.pack(side="top", padx=15, pady=10)
-
+        self.bouton_car.pack(side="top")
+        self.bouton_bicycle.pack(side="top")
+        self.bouton_foot.pack(side="bottom")
+        style.configure('mega.TButton', font = "Verdana", foreground="gray", activebackground="white", relief="flat")
         frame.pack()
 
     def bouton_car(self) -> None:

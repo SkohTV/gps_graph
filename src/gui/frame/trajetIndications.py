@@ -44,6 +44,8 @@ class AppTrajetIndications(tk.Frame):
         self.label_indications["font"] = font.Font(family="Verdana", weight="normal", size=15)
         self.label_km_temps["font"] = font.Font(family="Verdana", weight="normal", size=10)
         self.bouton_center["style"] = "giga.TButton"
+        self.label_indications.config(foreground="gray")
+        self.label_km_temps.config(foreground="gray")
 
         # On places les widgets dans la fenêtre à des endroits spécifiques
         self.map_widget.set_position(49.183333,-0.35)  # Caen, France
