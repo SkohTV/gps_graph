@@ -5,9 +5,9 @@ from typing import Any
 from urllib.parse import quote
 from dataclasses import dataclass
 
-from src.api.requests import QUERY_NODES, QUERY_WAYS_ALL, QUERY_WAYS_ALL
+from src.api_overpass.requests import QUERY_NODES, QUERY_WAYS
 from src.logging import logger
-from src.consts import CACHE_DIR, CACHE_FILE_NODES, CACHE_FILE_WAYS_ALL, CACHE_FILE_WAYS_CAR
+from src.consts import CACHE_FILE_NODES, CACHE_FILE_WAYS
 
 
 
@@ -48,26 +48,21 @@ def update_cache(force = False) -> None:
   '''
 
   # Remove the cache and update it
-  if not os.scandir(CACHE_DIR) or force:
+  if not os.path.isfile(CACHE_FILE_NODES) or not os.path.isfile(CACHE_FILE_WAYS) or force:
 
     # Cache nodes
     with open(CACHE_FILE_NODES, 'w') as f:
       nodes = query_overpass_api(QUERY_NODES)
       json.dump(nodes.items(), f)
      
-    # Cache car ways
-    with open(CACHE_FILE_WAYS_CAR, 'w') as f:
-      ways = query_overpass_api(QUERY_WAYS_ALL)
-      json.dump(ways.items(), f)
-
-    # Cache walk bike ways
-    with open(CACHE_FILE_WAYS_ALL, 'w') as f:
-      ways = query_overpass_api(QUERY_WAYS_ALL)
+    # Cache ways
+    with open(CACHE_FILE_WAYS, 'w') as f:
+      ways = query_overpass_api(QUERY_WAYS)
       json.dump(ways.items(), f)
 
 
 
-def load_cache() -> tuple:
+def load_cache() -> tuple[list, list]:
   '''Load the json cached files into objects'''
 
   # Load nodes
@@ -76,16 +71,11 @@ def load_cache() -> tuple:
     nodes = json.load(f)
 
   # Load nodes
-  logger.debug('Loading car ways into object')
-  with open(CACHE_FILE_WAYS_CAR) as f:
-    ways_car = json.load(f)
-
-  # Load nodes
-  logger.debug('Loading all ways into object')
-  with open(CACHE_FILE_WAYS_ALL) as f:
-    ways_all = json.load(f)
+  logger.debug('Loading ways into object')
+  with open(CACHE_FILE_WAYS) as f:
+    ways = json.load(f)
 
   logger.debug('All files loaded')
 
-  return (nodes, ways_car, ways_all)
+  return (nodes, ways)
 

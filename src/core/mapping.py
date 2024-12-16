@@ -1,7 +1,7 @@
 from math import sqrt
 from dataclasses import dataclass
 
-from src.api import load_cache
+from src.api_overpass import load_cache
 
 
 # http://theory.stanford.edu/~amitp/GameProgramming/MapRepresentations.html
@@ -19,7 +19,7 @@ def _raw_distance_nodes_same_road(src: Node, dst: Node):
 
 def testing_loadall_nodes():
   tmp = []
-  a, _, _ = load_cache()
+  a, _ = load_cache()
   for i in a:
     if 'lat' in i and 'lon' in i:
       tmp.append(Node(x=i['lat'], y=i['lon']))

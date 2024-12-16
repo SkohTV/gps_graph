@@ -6,33 +6,11 @@ from src.logging import setup_logging
 from src.api import load_cache, update_cache
 from src.args import arguments
 from src.gui.app import App
+from src.app import main
 
 
-
-def main():
-  verify_integrity_cache() # Check the .cache folder is valid
-  setup_parser() # Init the parser
-  setup_logging() # Init the logger
-
-  # Rebuild cache depending on args
-  update_cache(force=arguments.force_rebuild_cache)
-
-  load_cache() # Load the cached files
-
-  if not arguments.no_gui:
-    # run gui
-    ...
-
-  logger.debug('Reached end of script, goodbye')
-
-
-
-# Ne s'exéctue que si main.py est lancé, pas importé
 if __name__ == "__main__":
   # main()
-
-  # testing_loadall_nodes()
-
 
   # logger.debug("debug message", extra={"x": "hello"})
   # logger.info("info message")
