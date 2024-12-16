@@ -2,7 +2,6 @@ import json
 import logging
 import logging.config
 import os
-# from typing import override
 import datetime as dt
 from src.args import arguments
 
@@ -67,7 +66,6 @@ class JSONFormatter(logging.Formatter):
       self.fmt_keys = fmt_keys if fmt_keys is not None else {}
 
 
-  # @override
   def format(self, record: logging.LogRecord) -> str:
     '''Format a string to log into proper json'''
     message = self._prepare_log_dict(record)
