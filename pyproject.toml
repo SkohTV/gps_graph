@@ -9,7 +9,9 @@ readme = "README.md"
 python = "^3.12"
 requests = "^2.32.3"
 tkintermapview = "^1.29"
-
+cryptography = "43.0.0"
+pyicloud = "^1.0.0"
+python-dotenv = "^1.0.1"
 
 [build-system]
 requires = ["poetry-core"]
