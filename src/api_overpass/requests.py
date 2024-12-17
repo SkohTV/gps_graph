@@ -12,12 +12,13 @@ QUERY_NODES = f'''\
   (
     nwr["addr:housenumber"](area.searchArea);
     nwr["type"="associatedStreet"](area.searchArea);
+
+    nwr["shop"](area.searchArea);
+    nwr["brand"](area.searchArea);
   );
   out geom;
 '''
 # nwr["amenity"](area.searchArea);
-# nwr["shop"](area.searchArea);
-# nwr["brand"](area.searchArea);
 
 
 QUERY_WAYS = f'''\

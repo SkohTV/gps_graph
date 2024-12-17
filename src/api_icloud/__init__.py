@@ -1,5 +1,6 @@
 from pyicloud import PyiCloudService
 
+from src.graph.types import Position
 from src.logging import logger
 
 
@@ -57,7 +58,7 @@ class Icloud:
 
 
   # To verify : https://gps-coordinates.org/
-  def gps_request(self) -> tuple[float, float]:
+  def gps_request(self) -> Position:
     '''Send a GPS request to the logged in iPhone, and return the lat and longitude'''
 
     # If we call this before self.login() or self.login() failed
