@@ -62,7 +62,7 @@ def update_cache(force = False) -> None:
 
 
 
-def load_cache() -> tuple[list, list]:
+def load_web_cache() -> tuple[list, list]:
   '''Load the json cached files into objects'''
 
   # Load nodes
