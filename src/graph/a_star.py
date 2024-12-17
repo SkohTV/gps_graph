@@ -46,7 +46,6 @@ def a_star(
     closed_set.add(current)
 
     adjacents = [item for item in graph_ways._data[current][1]]
-    print(adjacents)
     for key, spd, dist in adjacents:
 
       if key in closed_set:

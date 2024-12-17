@@ -13,7 +13,7 @@ EdgeWay: TypeAlias = tuple[Key, MaxSpeed, Distance]
 NodeWay: TypeAlias = tuple[Position, list[EdgeWay]]
 
 
-Tags: TypeAlias = dict[str, str]
+Tags: TypeAlias = list[str]
 ClosestNode: TypeAlias = Key
 
 Item: TypeAlias = tuple[Position, ClosestNode, Tags]

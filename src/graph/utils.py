@@ -5,7 +5,6 @@ from unidecode import unidecode
 from src.graph.types import MaxSpeed
 
 
-
 def distance_nodes(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
   '''
   Compute the distance between 2 points on a sphere
@@ -38,8 +37,20 @@ def normalize_string(val: str) -> str:
   return unidecode(val.lower().replace(' ', '-'))
 
 
-# I'm not gonna bother fighting json.load(object_pairs_hook=)
+VALID_TAGS = [
+  normalize_string('addr:city'),
+  normalize_string('addr:housenumber'),
+  normalize_string('addr:postcode'),
+  normalize_string('addr:street'),
+  normalize_string('name'),
+  normalize_string('brand'),
+  normalize_string('contact:street'),
+  normalize_string('shop'),
+]
+
+# I'm not gonna bother fighting json.load(object_pairs_hook=) for typing
 def parse_tags(tags: Any) -> list[str]:
   '''Parse a list of tags and select only some of them'''
-  return [normalize_string(val) for key, val in tags.items()] # if key in VALID_TAGS
+  # print([normalize_string(val) for key, val in tags.items() if key in VALID_TAGS])
+  return [normalize_string(val) for key, val in tags.items() if key in VALID_TAGS]
 

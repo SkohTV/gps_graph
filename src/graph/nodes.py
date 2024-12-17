@@ -3,6 +3,8 @@ import statistics
 from difflib import get_close_matches
 from typing import Any
 
+from pyicloud.utils import sys
+
 from src.graph.utils import distance_nodes, normalize_string, parse_tags
 from src.consts import CACHE_FILE_COMPUTED_NODES_DATA, CACHE_FILE_COMPUTED_NODES_REL
 from src.graph.ways import GraphWays
@@ -111,6 +113,7 @@ class DictNodes:
     self._data[key] = item
     self.t += 1
 
+
   
   def handle_way(self, way: dict) -> None:
     '''Parse an item of type way'''
@@ -121,6 +124,11 @@ class DictNodes:
     position: Position = (statistics.mean([x['lat'] for x in geo]), statistics.mean([x['lon'] for x in geo]))
 
     tags: Tags = parse_tags(way['tags'])
+
+    # Add tags if already here
+    if key in self._data and self._data[key][2]:
+      tags.extend(self._data[key][2])
+
     street_name_possible = self.find_street_name(way)
 
     if street_name_possible is None:
@@ -160,7 +168,10 @@ class DictNodes:
     possible_streets = []
     street_name = ''
 
-    if 'addr:street' in data['tags']:
+    if data['id'] in self._data and self._data[data['id']][2][0]:
+      street_name = self._data[data['id']][2][0]
+
+    elif 'addr:street' in data['tags']:
       street_name = normalize_string(data['tags']['addr:street'])
 
     elif 'contact:street' in data['tags']:
