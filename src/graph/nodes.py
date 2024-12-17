@@ -100,6 +100,10 @@ class DictNodes:
     position: Position = (node['lat'], node['lon'])
     tags: Tags = parse_tags(node['tags'])
 
+    # Add tags if already here
+    if key in self._data and self._data[key][2]:
+      tags.extend(self._data[key][2])
+
     possible_streets = self.find_street_name(node)
 
     if possible_streets is None:

@@ -3,30 +3,40 @@
 *Laure WARLOP*<br>
 *CIR3*<br>
 
-## Context
-Graphs<br>
-Optimizations ?<br>
-Contraintes utilisateurs (changement initéraires, multi-moyen-locomotion)<br>
-Openstreetmap (comment fetch / quoi fetch ?)<br>
-OSMnX / NetworkX<br>
 
-## Goal
-We will build a GPS<br>
-Caen and at multiple transportation modes (car, walking...)<br>
-Using a graph to represent a city (Node are point of interest, edges are roads)<br>
-Users can add "warnings" (road blocked, traffic jam...) that change the path or time to arrive at destination<br>
-User friendly interface<br>
-<br>
-**<u>Problem solved by the project:</u>**<br>
-How to travel the fastest from A to B in a city ?<br>
+## What is it ?
+This is a small python GPS, using a combination of graphs and external dependancies,
+we can find for you the shortest way to your destination<br>
+**You will need an iPhone, sorry, no way around it**
 
 
-## Organisation
-Interface - wrlp<br>
-API Openstreetmap - Skoh<br>
-Bridge - Skoh<br>
-Graphs - wrlp<br>
-Core - both<br>
-<br>
-Chacun une branche<br>
-Merge sur le main tous les 2-3 soirs<br>
+## Installation
+
+### Virtual Env
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/python main.py
+```
+
+### NixOS
+```bash
+nix develop
+python3 main.py
+```
+
+## Usage
+
+### Running
+The first run will be slow, since there are a lot of cache files to be built<br>
+To check command line arguments, try `python3 main.py --help` !<br>
+
+
+### Credentials
+To retrieve your location, we use the iCloud API, so we need you to store your Apple crendentials somewhere<br>
+You can use environnement variables or provide a .env file with `--env FILE`
+```sh
+ICLOUD_EMAIL='email@website.com'
+ICLOUD_PWD='secret_password'
+```
+

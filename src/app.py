@@ -14,14 +14,13 @@ from src.api_overpass import load_web_cache, update_cache
 from src.args import arguments
 from src.utils import print_version
 from src.gui.app import App
-from src.core.bridge import BridgeApi, bridge_api
+from src.core.bridge import BridgeApi
 
 
 
 
 def main():
   '''Main logic for the app'''
-  global bridge_api
 
   # Print the version then exit
   if arguments.version:
@@ -32,7 +31,7 @@ def main():
   if arguments.env:
     load_dotenv(arguments.env) 
 
-  verify_integrity_cache() # Check the .cache folder is valid
+  cache_status = verify_integrity_cache() # Check the .cache folder is valid
   setup_parser() # Init the parser
   setup_logging() # Init the logger
 
@@ -55,8 +54,8 @@ def main():
 
 
   # Rebuild cache depending on args
-  if arguments.force_rebuild_cache:
-    # update_cache(force=True)
+  if arguments.force_rebuild_cache or not cache_status:
+    update_cache(force=True)
 
     nodes, ways = load_web_cache()
     bridge_api.graph_ways.load(ways)
@@ -71,14 +70,11 @@ def main():
     bridge_api.graph_ways.load_from_file()
     bridge_api.dict_nodes.load_from_file()
     bridge_api.tags_dict.load_from_file()
-  
-
-  bridge_api.get_possible_addresse('Rue Haie Vigné Caen 54')
 
 
   # Run the GUI
   if not arguments.no_gui:
-    app = App()
+    app = App(bridge_api=bridge_api)
     app.mainloop()
 
 

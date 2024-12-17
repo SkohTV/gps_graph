@@ -23,8 +23,6 @@ def a_star(
   https://en.wikipedia.org/wiki/A*_search_algorithm
   https://gamedev.stackexchange.com/questions/49952/a-for-non-grid-network
   '''
-  src = dict_nodes._data[src][1]
-  dst = dict_nodes._data[dst][1]
   tr_idx = ['car', 'bike', 'walk'].index(transport)
 
   closed_set: set[Key] = set()
@@ -51,7 +49,7 @@ def a_star(
       if key in closed_set:
         continue
 
-      tentative_g_score = g_score[current] + dist * spd[tr_idx]
+      tentative_g_score = g_score[current] + dist * (130 - spd[tr_idx])
 
       if key not in open_set or tentative_g_score < g_score[key]:
         came_from[key] = current

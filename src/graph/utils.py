@@ -38,9 +38,7 @@ def normalize_string(val: str) -> str:
 
 
 VALID_TAGS = [
-  normalize_string('addr:city'),
   normalize_string('addr:housenumber'),
-  normalize_string('addr:postcode'),
   normalize_string('addr:street'),
   normalize_string('name'),
   normalize_string('brand'),

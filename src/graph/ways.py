@@ -104,3 +104,9 @@ class GraphWays:
     with open(CACHE_FILE_COMPUTED_WAYS_NAME) as f:
       self._named_ways = json.load(f)
 
+
+  def slow_find_closest_node(self, pos: Position) -> Key:
+    min_dist = {k: distance_nodes(*pos, *v[0]) for k, v in self._data.items()}
+    return min(min_dist, key=min_dist.get) # type: ignore
+
+
