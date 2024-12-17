@@ -2,16 +2,23 @@
 Page proposant d'ajouter des warnings
 """
 
+import os
+ICON_DIR = os.path.join(os.getcwd(), 'icon')
+ICON_FILE_ACCUEIL = os.path.join(ICON_DIR, 'accueil_resize.png')
+
 import tkinter as tk
 import tkintermapview
 from tkinter import ttk
 from tkinter import font
+from tkinter import PhotoImage
+from tkinter.ttk import Style
 
 class AppWarning(tk.Frame):
     """ 
     Page warning
     Attributes:
     controller (src.app.App): Classe tk.Tk principale qui controle la tk.Frame
+    bouton_accueil : Bouton envoyant sur la page d'accueil
     bouton_police : Bouton pour choisir le warning police
     bouton_travaux : Bouton pour choisir le warning travaux
     bouton_embouteillage : Bouton pour choisir le warning embouteillage
@@ -21,6 +28,7 @@ class AppWarning(tk.Frame):
     bouton_vehicule_arrete : Bouton pour choisir le warning vehicule arrete 
     Methods: 
     __init__: Initialise l'objet
+    bouton_accueil : Bouton envoyant sur la page d'accueil
     bouton_police : Bouton pour choisir le warning police
     bouton_travaux : Bouton pour choisir le warning travaux
     bouton_embouteillage : Bouton pour choisir le warning embouteillage
@@ -40,11 +48,14 @@ class AppWarning(tk.Frame):
         # On créer une frame
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        style = Style()
 
         # On créer différentes frames pour formatter l'affichage de la page
         frame = ttk.Frame(self)
 
         # On définit des widget
+        self.accueil = PhotoImage(file=ICON_FILE_ACCUEIL)
+        self.bouton_accueil = ttk.Button(frame, image=self.accueil, command=self.bouton_accueil)
         self.bouton_police = ttk.Button(frame, text="Police", command=self.bouton_police)
         self.bouton_travaux = ttk.Button(frame, text="Travaux", command=self.bouton_travaux)
         self.bouton_embouteillage = ttk.Button(frame, text="Embouteillage", command=self.bouton_embouteillage)
@@ -61,8 +72,11 @@ class AppWarning(tk.Frame):
         self.bouton_mauvais_temps["style"] = "giga.TButton"
         self.bouton_danger["style"] = "giga.TButton"
         self.bouton_vehicule_arrete["style"] = "giga.TButton"
+        self.bouton_accueil["style"] = "acc.TButton"
+        style.configure('acc.TButton', font = "Verdana", foreground="gray", activebackground="black", relief="flat")
 
         # On places les widgets dans la fenêtre à des endroits spécifiques
+        self.bouton_accueil.pack(side="top", padx=5)
         self.bouton_police.pack(side="top", padx=15, pady=5)
         self.bouton_travaux.pack(side="top", padx=15, pady=5)
         self.bouton_embouteillage.pack(side="top", padx=15, pady=10)
@@ -71,7 +85,7 @@ class AppWarning(tk.Frame):
         self.bouton_danger.pack(side="top", padx=15, pady=10)
         self.bouton_vehicule_arrete.pack(side="top", padx=15, pady=10)
 
-        frame.pack()
+        frame.pack(expand=True, fill="both")
 
     def bouton_police(self) -> None:
         """ Affiche la page Accueil"""
@@ -100,3 +114,7 @@ class AppWarning(tk.Frame):
     def bouton_vehicule_arrete(self) -> None:
             """ Affiche la page Accueil"""
             self.controller.external_show_frame("AppAccueil")
+
+    def bouton_accueil(self) -> None:
+        """ Affiche la page d'accueil"""
+        self.controller.external_show_frame("AppAccueil")
