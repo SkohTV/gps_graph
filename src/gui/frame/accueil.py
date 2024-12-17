@@ -67,12 +67,10 @@ class AppAccueil(tk.Frame):
         self.map_widget.pack(fill="both")
 
         # le marker prend la position
-        # marker_1 = self.map_widget.set_address("16 bis Quai Amiral Hamelin, caen, france", marker=True)
-
-        # print(marker_1.position, marker_1.text)  # prend la position et le texte
-
-        # marker_1.set_text("Moho")  # met un nouveau texte
-        # marker_1.text("Moho")
+        self.map_widget.set_address("colosseo, rome, italy")
+        marker_1 = self.map_widget.set_marker(52.516268, 13.377695, text="Brandenburger Tor")
+        print(marker_1.position, marker_1.text)
+        marker_1.set_text("Brandenburger Tor")
 
         frame.pack()
 

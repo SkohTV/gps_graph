@@ -50,9 +50,9 @@ class AppVehicules(tk.Frame):
         self.bouton_foot["style"] = "mega.TButton"
 
         # On places les widgets dans la fenêtre à des endroits spécifiques
-        self.bouton_car.pack(side="top")
-        self.bouton_bicycle.pack(side="top")
-        self.bouton_foot.pack(side="bottom")
+        # self.bouton_car.pack(side="top")
+        # self.bouton_bicycle.pack(side="top")
+        # self.bouton_foot.pack(side="bottom")
         style.configure('mega.TButton', font = "Verdana", foreground="gray", activebackground="white", relief="flat")
         frame.pack()
 

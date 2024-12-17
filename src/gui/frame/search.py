@@ -60,14 +60,21 @@ class AppSearch(tk.Frame):
         frame.pack()
 
     def bouton_search(self) -> None:
-        """ Affiche la page TrajetIndication"""
-        self.controller.external_show_frame("AppItineraire")
+        """ Affiche différents boutons avec plusieurs adresses proposées"""
+        frame = ttk.Frame(self)
+        self.bouton_1 = ttk.Button(frame, text="1", command=self.affiche_itineraire)
+        self.bouton_1["style"] = "giga.TButton"
+        self.bouton_1.pack(side="bottom", padx=15, pady=5)
+        frame.pack()
 
     def bouton_saved(self) -> None:
         """ Affiche la page TrajetIndication"""
         self.controller.external_show_frame("AppItineraire")
 
     def bouton_recent(self) -> None:
-            """ Affiche la page TrajetIndication"""
-            self.controller.external_show_frame("AppItineraire")
+        """ Affiche la page TrajetIndication"""
+        self.controller.external_show_frame("AppItineraire")
 
+    def affiche_itineraire(self) -> None:
+         """ Affiche la page TrajetIndication"""
+         self.controller.external_show_frame("AppItineraire")
