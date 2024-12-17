@@ -46,7 +46,7 @@ class App(tk.Tk):
         self.resizable(False, False)
         
         # On crée un pack pour englober la frame
-        container = tk.Frame(self, height=1500, width=1300)
+        container = tk.Frame(self, height=1200, width=800)
         container.pack(fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
@@ -77,7 +77,7 @@ class App(tk.Tk):
 
         # On met la frame en grand
         self.title("GPS")
-        self.geometry("1300x1500")
+        self.geometry("800x1200")
 
         # On l'affiche
         frame.tkraise()
