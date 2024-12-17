@@ -23,4 +23,11 @@ def verify_integrity_cache() -> None:
 
 
 def print_version() -> None:
+  '''Print the version of the project name'''
   print(f'{PROJECT_NAME} - {VERSION}')
+
+
+def keys_to_int(x: dict[str, str]):
+  '''Convert a key of a json object to an int'''
+  return {int(k): v for k, v in x if k.isdigit()}
+
