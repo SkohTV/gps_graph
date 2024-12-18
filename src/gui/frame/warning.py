@@ -1,17 +1,14 @@
 """
 Page proposant d'ajouter des warnings
 """
-
-import os
-ICON_DIR = os.path.join(os.getcwd(), 'icon')
-ICON_FILE_ACCUEIL = os.path.join(ICON_DIR, 'accueil_resize.png')
-
 import tkinter as tk
-import tkintermapview
 from tkinter import ttk
-from tkinter import font
 from tkinter import PhotoImage
 from tkinter.ttk import Style
+
+from src.consts import ICON_FILE_ACCUEIL
+
+
 
 class AppWarning(tk.Frame):
     """ 
@@ -89,31 +86,38 @@ class AppWarning(tk.Frame):
 
     def bouton_police(self) -> None:
         """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Police', self.controller.location))
         self.controller.external_show_frame("AppAccueil")
 
     def bouton_travaux(self) -> None:
         """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Travaux', self.controller.location))
         self.controller.external_show_frame("AppAccueil")
 
     def bouton_embouteillage(self) -> None:
-            """ Affiche la page Accueil"""
-            self.controller.external_show_frame("AppAccueil")
+        """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Embouteillage', self.controller.location))
+        self.controller.external_show_frame("AppAccueil")
 
     def bouton_accident(self) -> None:
-            """ Affiche la page Accueil"""
-            self.controller.external_show_frame("AppAccueil")
+        """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Accident', self.controller.location))
+        self.controller.external_show_frame("AppAccueil")
 
     def bouton_mauvais_temps(self) -> None:
-            """ Affiche la page Accueil"""
-            self.controller.external_show_frame("AppAccueil")
+        """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Mauvais temps', self.controller.location))
+        self.controller.external_show_frame("AppAccueil")
 
     def bouton_danger(self) -> None:
-            """ Affiche la page Accueil"""
-            self.controller.external_show_frame("AppAccueil")
+        """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Danger', self.controller.location))
+        self.controller.external_show_frame("AppAccueil")
 
     def bouton_vehicule_arrete(self) -> None:
-            """ Affiche la page Accueil"""
-            self.controller.external_show_frame("AppAccueil")
+        """ Affiche la page Accueil"""
+        self.controller.warnings.append(('Véhicule arrêté', self.controller.location))
+        self.controller.external_show_frame("AppAccueil")
 
     def bouton_accueil(self) -> None:
         """ Affiche la page d'accueil"""

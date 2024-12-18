@@ -18,3 +18,5 @@ CACHE_FILE_COMPUTED_WAYS_WAYS = os.path.join(CACHE_DIR, 'computed_ways_ways.json
 CACHE_FILE_COMPUTED_WAYS_NAME = os.path.join(CACHE_DIR, 'computed_ways_name.json')
 CACHE_FILE_COMPUTED_TAGS_DATA = os.path.join(CACHE_DIR, 'computed_tags_data.json')
 
+ICON_DIR = os.path.join(os.getcwd(), 'icon')
+ICON_FILE_ACCUEIL = os.path.join(ICON_DIR, 'accueil_resize.png')
